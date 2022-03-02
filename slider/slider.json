@@ -1,0 +1,20 @@
+[
+    {
+        "number": 1,
+        "title": "Gradients",
+        "description": "Start, end, angle",
+        "image": "./images/first.jpeg"
+    },
+    {
+        "number": 2,
+        "title": "Presets",
+        "description": "Manage presets",
+        "image": "./images/second.png"
+    },
+    {
+        "number": 3,
+        "title": "Colors",
+        "description": "Pick any color",
+        "image": "./images/third.png"
+    }
+]

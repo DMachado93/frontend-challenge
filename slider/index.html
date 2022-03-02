@@ -1,7 +1,60 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8" />
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Slider test</title>
+		<link rel="stylesheet" href="./styles.css">
 	</head>
-	<body></body>
+	<body>
+		<div id="corousel-main">
+			<a class="arrow" onclick="showPrevious()">&#10094;</a>
+  			<a class="arrow" onclick="showNext()">&#10095;</a>
+			<div id="carousel-inner">
+				<div id="carousel-top">
+					<div id="top-number"></div>
+					<div id="top-title"></div>
+					<div id="top-description"></div>
+				</div>
+				<div id="carousel-bottom">
+					<img id="gradient" src="" />
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
+
+<script>
+	var currentIndex = 0;
+	var data;
+
+ 
+	window.addEventListener("load", function () {
+		fetch("./slider.json") 
+		.then(response => response.json()) 
+		.then(parsed => renderData(parsed)); 
+	});
+
+	function showPrevious() {
+		if(currentIndex > 0) {
+			currentIndex--;
+			renderData(data);
+		}
+	}
+
+	function showNext() {
+		if(currentIndex < data.length) {
+			currentIndex++;
+			renderData(data)
+		}
+	}
+
+	function renderData(carouselData) {
+		if(data === undefined) data = carouselData;
+		document.querySelector("#gradient").src = carouselData[currentIndex].image;
+		document.querySelector("#top-number").innerHTML = carouselData[currentIndex].number;
+		document.querySelector("#top-number").style.backgroundImage = "url("+ carouselData[currentIndex].image +")";
+		document.querySelector("#top-title").innerHTML = carouselData[currentIndex].title;
+		document.querySelector("#top-description").innerHTML = carouselData[currentIndex].description;
+	}
+</script>
