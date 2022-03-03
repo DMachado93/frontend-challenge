@@ -85,51 +85,62 @@
 	function animateToRight() {
 		document.querySelector(".carousel-top").animate([
 			{ transform: 'translate3D(26%, 0, 0)' },
-			{ transform: 'translate3D(-25%, 0, 0)' }
+			{ transform: 'translate3D(-26%, 0, 0)' }
 			], {
-			duration: 220,
+			duration: 250,
 			iterations: 1
 		})
 		document.querySelector(".carousel-bottom").animate([
 			{ transform: 'translate3D(0, 0, 0)' }, 
 			{ transform: 'translate3D(1px, 0, 0)' }
 			], {
-			duration: 220,
+			duration: 250,
 			iterations: 1
 		})
 
+
 		setTimeout(() => {
+			document.querySelector(".carousel-top").style.opacity = 0;
 			document.querySelector(".gradient").src = data[currentIndex].image;
 			document.querySelector(".top-number").innerHTML = data[currentIndex].number;
 			document.querySelector(".top-number").style.backgroundImage = "url("+ data[currentIndex].image +")";
 			document.querySelector(".top-title").innerHTML = data[currentIndex].title;
 			document.querySelector(".top-description").innerHTML = data[currentIndex].description;
-		}, 110);
+		}, 150);
+
+		setTimeout(() => {
+			document.querySelector(".carousel-top").style.opacity = 100;
+		}, 200);
 	}
 
 	function animateToLeft() {
 		document.querySelector(".carousel-top").animate([
 			{ transform: 'translate3D(-26%, 0, 0)' },
-			{ transform: 'translate3D(25%, 0, 0)' }
+			{ transform: 'translate3D(26%, 0, 0)' }
 			], {
-			duration: 220,
+			duration: 250,
 			iterations: 1
 		})
 		document.querySelector(".carousel-bottom").animate([
 			{ transform: 'translate3D(0, 0, 0)' }, 
 			{ transform: 'translate3D(-1px, 0, 0)' }
 			], {
-			duration: 220,
+			duration: 250,
 			iterations: 1
 		})
 
 		setTimeout(() => {
+			document.querySelector(".carousel-top").style.opacity = 0;
 			document.querySelector(".gradient").src = data[currentIndex].image;
 			document.querySelector(".top-number").innerHTML = data[currentIndex].number;
 			document.querySelector(".top-number").style.backgroundImage = "url("+ data[currentIndex].image +")";
 			document.querySelector(".top-title").innerHTML = data[currentIndex].title;
 			document.querySelector(".top-description").innerHTML = data[currentIndex].description;
-		}, 110);
+		}, 150);
+
+		setTimeout(() => {
+			document.querySelector(".carousel-top").style.opacity = 100;
+		}, 200);
 	}
 
 </script>
