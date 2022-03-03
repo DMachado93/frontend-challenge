@@ -30,20 +30,20 @@
 	let touchstartX = 0
 	let touchendX = 0
 
-	const slider = document.querySelector('.carousel-main')
+	const slider = document.querySelector('.carousel-main');
 
 	function handleGesture() {
-		if (touchendX < touchstartX) showNext()
-		if (touchendX > touchstartX) showPrevious()
+		if (touchendX < touchstartX) showNext();
+		if (touchendX > touchstartX) showPrevious();
 	}
 
 	slider.addEventListener('touchstart', e => {
-	touchstartX = e.changedTouches[0].screenX
+		touchstartX = e.changedTouches[0].screenX
 	})
 
 	slider.addEventListener('touchend', e => {
-	touchendX = e.changedTouches[0].screenX
-	handleGesture()
+		touchendX = e.changedTouches[0].screenX
+		handleGesture()
 	})
  
 	window.addEventListener("load", function () {
@@ -84,7 +84,8 @@
 
 	function animateToRight() {
 		document.querySelector(".carousel-top").animate([
-			{ transform: 'translate3D(25%, 0, 0)' }
+			{ transform: 'translate3D(26%, 0, 0)' },
+			{ transform: 'translate3D(-25%, 0, 0)' }
 			], {
 			duration: 220,
 			iterations: 1
@@ -97,16 +98,19 @@
 			iterations: 1
 		})
 
-		document.querySelector(".gradient").src = data[currentIndex].image;
-		document.querySelector(".top-number").innerHTML = data[currentIndex].number;
-		document.querySelector(".top-number").style.backgroundImage = "url("+ data[currentIndex].image +")";
-		document.querySelector(".top-title").innerHTML = data[currentIndex].title;
-		document.querySelector(".top-description").innerHTML = data[currentIndex].description;
+		setTimeout(() => {
+			document.querySelector(".gradient").src = data[currentIndex].image;
+			document.querySelector(".top-number").innerHTML = data[currentIndex].number;
+			document.querySelector(".top-number").style.backgroundImage = "url("+ data[currentIndex].image +")";
+			document.querySelector(".top-title").innerHTML = data[currentIndex].title;
+			document.querySelector(".top-description").innerHTML = data[currentIndex].description;
+		}, 110);
 	}
 
 	function animateToLeft() {
 		document.querySelector(".carousel-top").animate([
-			{ transform: 'translate3D(-25%, 0, 0)' }
+			{ transform: 'translate3D(-26%, 0, 0)' },
+			{ transform: 'translate3D(25%, 0, 0)' }
 			], {
 			duration: 220,
 			iterations: 1
@@ -119,11 +123,13 @@
 			iterations: 1
 		})
 
-		document.querySelector(".gradient").src = data[currentIndex].image;
-		document.querySelector(".top-number").innerHTML = data[currentIndex].number;
-		document.querySelector(".top-number").style.backgroundImage = "url("+ data[currentIndex].image +")";
-		document.querySelector(".top-title").innerHTML = data[currentIndex].title;
-		document.querySelector(".top-description").innerHTML = data[currentIndex].description;
+		setTimeout(() => {
+			document.querySelector(".gradient").src = data[currentIndex].image;
+			document.querySelector(".top-number").innerHTML = data[currentIndex].number;
+			document.querySelector(".top-number").style.backgroundImage = "url("+ data[currentIndex].image +")";
+			document.querySelector(".top-title").innerHTML = data[currentIndex].title;
+			document.querySelector(".top-description").innerHTML = data[currentIndex].description;
+		}, 110);
 	}
 
 </script>

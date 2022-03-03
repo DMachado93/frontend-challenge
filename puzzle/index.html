@@ -8,13 +8,13 @@
 		<!-- Do not edit any html in the body tag -->
 		<figure class="puzzle-figure">
 			<ul class="puzzle">
-				<li class="tile">1</li>
-				<li class="tile">2</li>
-				<li class="tile">3</li>
 				<li class="tile">4</li>
+				<li class="tile">2</li>
 				<li class="tile">5</li>
-				<li class="tile">6</li>
+				<li class="tile">1</li>
 				<li class="tile">7</li>
+				<li class="tile">3</li>
+				<li class="tile">6</li>
 				<li class="tile">8</li>
 			</ul>
 
@@ -22,3 +22,58 @@
 		</figure>
 	</body>
 </html>
+
+<script>
+
+	var tiles = [4, 2, 5, 1, 7, 3, 6, 8, 0]
+	window.addEventListener("load", function () {
+		var empty = document.createElement('li');
+		empty.classList.add('tile-empty');
+		empty.dataset.index = 8;
+		empty.addEventListener('click', (e) => {
+				shiftTile(empty)
+		});
+		const ul = document.querySelector('.puzzle');
+		ul.appendChild(empty);
+
+		const items = document.querySelectorAll('.tile');
+		items.forEach((item, i) => {
+			item.dataset.index = i;
+			item.addEventListener('click', (e) => {
+				shiftTile(item)
+			});
+		});
+	});
+	
+	function shiftTile (el) {
+        var index = parseInt(el.dataset.index);
+        var newIndex = -1;
+
+        if (index - 1 >= 0 && tiles[index - 1] == 0) { // Can go left
+            newIndex = index - 1;
+        } else if (index + 1 < tiles.length && tiles[index + 1] == 0) { // Can go right
+            newIndex = index + 1;
+        } else if (index - 3 >= 0 && tiles[index - 3] == 0) { // Can go to up
+            newIndex = index - 3;
+        } else if (index + 3 < tiles.length && tiles[index + 3] == 0) { // Can go down
+            newIndex = index + 3;
+        }
+
+        if (newIndex != -1) { //Can change spot, get new LI and current LI, and change data
+            var temp = tiles[newIndex];
+			let targetLi = document.querySelector('[data-index="'+ newIndex +'"]');
+			let currentLi = document.querySelector('[data-index="'+ index +'"]');
+			targetLi.innerHTML = tiles[index];
+			currentLi.innerHTML = temp;
+
+			targetLi.classList.remove('tile-empty');
+			targetLi.classList.add('tile');
+
+			currentLi.classList.remove('tile');
+			currentLi.classList.add('tile-empty');
+			
+            tiles[newIndex] = tiles[index];
+            tiles[index] = temp;
+        }
+    };
+</script>

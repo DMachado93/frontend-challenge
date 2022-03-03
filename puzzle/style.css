@@ -8,7 +8,7 @@ body {
     width: 25vw; 
     height: 25vw; 
     background-color: black;
-    padding: 5px;
+    padding: 0.5%;
     margin: 5% auto;
     border-radius: 2%;
 }
@@ -28,12 +28,37 @@ body {
     width: 32%; 
     height: 31%; 
     box-sizing: border-box;
-    border: 5px solid #555;
+    border: 0.4vw solid #555;
     font-size: 3.5vw;
     text-align: center;
+    cursor: pointer;
+}
+
+.tile-empty {
+    font-family: 'Roboto', sans-serif;
+    background-color: transparent;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 32%; 
 }
 
 figcaption {
-    font-size: 2vw;
+    font-size: 1.5vw;
     font-family: 'Roboto', sans-serif;
+}
+
+@media only screen and (max-width: 900px) {
+    .tile {
+        font-family: 'Roboto', sans-serif;
+        background-color: white;
+        display: inline-block;
+        line-height: 200%;
+        width: 30.5%; 
+        height: 30.5%; 
+        box-sizing: border-box;
+        border: 0.4vw solid #555;
+        font-size: 3.5vw;
+        text-align: center;
+        cursor: pointer;
+    }
 }
