@@ -7,140 +7,107 @@
 		<link rel="stylesheet" href="./styles.css">
 	</head>
 	<body>
+		<a class="arrow" onclick="showPrevious()">&#10094;</a>
+  		<a class="arrow" onclick="showNext()">&#10095;</a>
 		<div class="carousel-main">
-			<a class="arrow" onclick="showPrevious()">&#10094;</a>
-  			<a class="arrow" onclick="showNext()">&#10095;</a>
-			<div class="carousel-inner">
+			<div class="carousel-inner active">
 				<div class="carousel-top">
-				  <div class="top-number"></div>
-				  <div class="top-title"></div>
-				  <div class="top-description"></div>
+				  <div class="top-number" style="background-image: url('./images/first.jpeg');">1</div>
+				  <div class="top-title">Gradients</div>
+				  <div class="top-description">Start, end, angle</div>
 				</div>
 				<div class="carousel-bottom">
-				  <img class="gradient" src="" />
+				  <img class="gradient" src="./images/first.jpeg" />
 				</div>
-			  </div>
 			</div>
+
+			<div class="carousel-inner next">
+				<div class="carousel-top">
+				  <div class="top-number" style="background-image: url('./images/second.png');">2</div>
+				  <div class="top-title">Presets</div>
+				  <div class="top-description">Manage presets</div>
+				</div>
+				<div class="carousel-bottom">
+				  <img class="gradient" src="./images/second.png" />
+				</div>
+			</div>
+
+			<div class="carousel-inner prev">
+				<div class="carousel-top">
+				  <div class="top-number" style="background-image: url('./images/third.png');">3</div>
+				  <div class="top-title">Colors</div>
+				  <div class="top-description">Pick any color</div>
+				</div>
+				<div class="carousel-bottom">
+				  <img class="gradient" src="./images/third.png" />
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
 
 <script>
 	var currentIndex = 0;
-	var data;
 	let touchstartX = 0
 	let touchendX = 0
 
-	const slider = document.querySelector('.carousel-main');
+	const slider = document.querySelector(".carousel-main");
 
 	function handleGesture() {
 		if (touchendX < touchstartX) showNext();
 		if (touchendX > touchstartX) showPrevious();
 	}
 
-	slider.addEventListener('touchstart', e => {
+	slider.addEventListener("touchstart", e => {
 		touchstartX = e.changedTouches[0].screenX
 	})
 
-	slider.addEventListener('touchend', e => {
+	slider.addEventListener("touchend", e => {
 		touchendX = e.changedTouches[0].screenX
 		handleGesture()
 	})
- 
-	window.addEventListener("load", function () {
-		fetch("./slider.json") 
-		.then(response => response.json()) 
-		.then(parsed => renderData(parsed, 0)); 
-	});
 
 	function showPrevious() {
-		if(currentIndex > 0) {
-			currentIndex--;
-			renderData(data, -1);
-		}
+		goToSlide(false);
 	}
 
 	function showNext() {
-		if(currentIndex < data.length-1) {
+		goToSlide(true);
+	}
+
+	function goToSlide(next) {
+		let items = document.querySelectorAll('.carousel-inner');
+		if(next) { //Go to next slide
+
+		 	items[currentIndex].classList.remove("active");
 			currentIndex++;
-			renderData(data, 1)
+			if(currentIndex > items.length - 1) currentIndex = 0;
+
+			items[currentIndex].classList.remove("next", "prev", "active");
+			items[currentIndex].classList.add("active");
+
+			
+			items[currentIndex + 1].classList.remove("next", "prev", "active");
+			items[currentIndex + 1].classList.add("next");
+
+		} else { //Go to previous slide
+
+		 	items[currentIndex].classList.remove("active");
+			currentIndex--;
+			if(currentIndex < 0) currentIndex = items.length - 1;
+			
+			items[currentIndex].classList.remove("next", "prev", "active");
+			items[currentIndex].classList.add("active");
+
+			if(currentIndex === items.length - 1) {
+				items[0].classList.remove("next", "prev", "active");
+				items[0].classList.add("next");
+			} else {
+				items[currentIndex + 1].classList.remove("next", "prev", "active");
+				items[currentIndex + 1].classList.add("next");
+			}
+			
 		}
-	}
-
-
-
-	function renderData(carouselData, next) {
-		if(data === undefined) data = carouselData;
-
-		if(next === -1) animateToRight();
-		if(next === 1) animateToLeft();
-		if(next === 0) {
-			document.querySelector(".gradient").src = carouselData[currentIndex].image;
-			document.querySelector(".top-number").innerHTML = carouselData[currentIndex].number;
-			document.querySelector(".top-number").style.backgroundImage = "url("+ carouselData[currentIndex].image +")";
-			document.querySelector(".top-title").innerHTML = carouselData[currentIndex].title;
-			document.querySelector(".top-description").innerHTML = carouselData[currentIndex].description;
-		}
-	}
-
-	function animateToRight() {
-		document.querySelector(".carousel-top").animate([
-			{ transform: 'translate3D(26%, 0, 0)' },
-			{ transform: 'translate3D(-26%, 0, 0)' }
-			], {
-			duration: 250,
-			iterations: 1
-		})
-		document.querySelector(".carousel-bottom").animate([
-			{ transform: 'translate3D(0, 0, 0)' }, 
-			{ transform: 'translate3D(1px, 0, 0)' }
-			], {
-			duration: 250,
-			iterations: 1
-		})
-
-
-		setTimeout(() => {
-			document.querySelector(".carousel-top").style.opacity = 0;
-			document.querySelector(".gradient").src = data[currentIndex].image;
-			document.querySelector(".top-number").innerHTML = data[currentIndex].number;
-			document.querySelector(".top-number").style.backgroundImage = "url("+ data[currentIndex].image +")";
-			document.querySelector(".top-title").innerHTML = data[currentIndex].title;
-			document.querySelector(".top-description").innerHTML = data[currentIndex].description;
-		}, 150);
-
-		setTimeout(() => {
-			document.querySelector(".carousel-top").style.opacity = 100;
-		}, 200);
-	}
-
-	function animateToLeft() {
-		document.querySelector(".carousel-top").animate([
-			{ transform: 'translate3D(-26%, 0, 0)' },
-			{ transform: 'translate3D(26%, 0, 0)' }
-			], {
-			duration: 250,
-			iterations: 1
-		})
-		document.querySelector(".carousel-bottom").animate([
-			{ transform: 'translate3D(0, 0, 0)' }, 
-			{ transform: 'translate3D(-1px, 0, 0)' }
-			], {
-			duration: 250,
-			iterations: 1
-		})
-
-		setTimeout(() => {
-			document.querySelector(".carousel-top").style.opacity = 0;
-			document.querySelector(".gradient").src = data[currentIndex].image;
-			document.querySelector(".top-number").innerHTML = data[currentIndex].number;
-			document.querySelector(".top-number").style.backgroundImage = "url("+ data[currentIndex].image +")";
-			document.querySelector(".top-title").innerHTML = data[currentIndex].title;
-			document.querySelector(".top-description").innerHTML = data[currentIndex].description;
-		}, 150);
-
-		setTimeout(() => {
-			document.querySelector(".carousel-top").style.opacity = 100;
-		}, 200);
 	}
 
 </script>

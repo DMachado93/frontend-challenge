@@ -28,7 +28,10 @@ body {
     width: 32%; 
     height: 31%; 
     box-sizing: border-box;
-    border: 0.4vw solid #555;
+    border-top: 0.5vw solid #ccd1d9;
+    border-left: 0.5vw solid #ccd1d9;
+    border-right: 0.5vw solid #83858a;
+    border-bottom: 0.5vw solid #83858a;
     font-size: 3.5vw;
     text-align: center;
     cursor: pointer;
