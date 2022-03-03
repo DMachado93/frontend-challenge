@@ -7,54 +7,123 @@
 		<link rel="stylesheet" href="./styles.css">
 	</head>
 	<body>
-		<div id="corousel-main">
+		<div class="carousel-main">
 			<a class="arrow" onclick="showPrevious()">&#10094;</a>
   			<a class="arrow" onclick="showNext()">&#10095;</a>
-			<div id="carousel-inner">
-				<div id="carousel-top">
-					<div id="top-number"></div>
-					<div id="top-title"></div>
-					<div id="top-description"></div>
+			<div class="carousel-inner">
+				<div class="carousel-top">
+				  <div class="top-number"></div>
+				  <div class="top-title"></div>
+				  <div class="top-description"></div>
 				</div>
-				<div id="carousel-bottom">
-					<img id="gradient" src="" />
+				<div class="carousel-bottom">
+				  <img class="gradient" src="" />
 				</div>
+			  </div>
 			</div>
-		</div>
 	</body>
 </html>
 
 <script>
 	var currentIndex = 0;
 	var data;
+	let touchstartX = 0
+	let touchendX = 0
 
+	const slider = document.querySelector('.carousel-main')
+
+	function handleGesture() {
+		if (touchendX < touchstartX) showNext()
+		if (touchendX > touchstartX) showPrevious()
+	}
+
+	slider.addEventListener('touchstart', e => {
+	touchstartX = e.changedTouches[0].screenX
+	})
+
+	slider.addEventListener('touchend', e => {
+	touchendX = e.changedTouches[0].screenX
+	handleGesture()
+	})
  
 	window.addEventListener("load", function () {
 		fetch("./slider.json") 
 		.then(response => response.json()) 
-		.then(parsed => renderData(parsed)); 
+		.then(parsed => renderData(parsed, 0)); 
 	});
 
 	function showPrevious() {
 		if(currentIndex > 0) {
 			currentIndex--;
-			renderData(data);
+			renderData(data, -1);
 		}
 	}
 
 	function showNext() {
-		if(currentIndex < data.length) {
+		if(currentIndex < data.length-1) {
 			currentIndex++;
-			renderData(data)
+			renderData(data, 1)
 		}
 	}
 
-	function renderData(carouselData) {
+
+
+	function renderData(carouselData, next) {
 		if(data === undefined) data = carouselData;
-		document.querySelector("#gradient").src = carouselData[currentIndex].image;
-		document.querySelector("#top-number").innerHTML = carouselData[currentIndex].number;
-		document.querySelector("#top-number").style.backgroundImage = "url("+ carouselData[currentIndex].image +")";
-		document.querySelector("#top-title").innerHTML = carouselData[currentIndex].title;
-		document.querySelector("#top-description").innerHTML = carouselData[currentIndex].description;
+
+		if(next === -1) animateToRight();
+		if(next === 1) animateToLeft();
+		if(next === 0) {
+			document.querySelector(".gradient").src = carouselData[currentIndex].image;
+			document.querySelector(".top-number").innerHTML = carouselData[currentIndex].number;
+			document.querySelector(".top-number").style.backgroundImage = "url("+ carouselData[currentIndex].image +")";
+			document.querySelector(".top-title").innerHTML = carouselData[currentIndex].title;
+			document.querySelector(".top-description").innerHTML = carouselData[currentIndex].description;
+		}
 	}
+
+	function animateToRight() {
+		document.querySelector(".carousel-top").animate([
+			{ transform: 'translate3D(25%, 0, 0)' }
+			], {
+			duration: 220,
+			iterations: 1
+		})
+		document.querySelector(".carousel-bottom").animate([
+			{ transform: 'translate3D(0, 0, 0)' }, 
+			{ transform: 'translate3D(1px, 0, 0)' }
+			], {
+			duration: 220,
+			iterations: 1
+		})
+
+		document.querySelector(".gradient").src = data[currentIndex].image;
+		document.querySelector(".top-number").innerHTML = data[currentIndex].number;
+		document.querySelector(".top-number").style.backgroundImage = "url("+ data[currentIndex].image +")";
+		document.querySelector(".top-title").innerHTML = data[currentIndex].title;
+		document.querySelector(".top-description").innerHTML = data[currentIndex].description;
+	}
+
+	function animateToLeft() {
+		document.querySelector(".carousel-top").animate([
+			{ transform: 'translate3D(-25%, 0, 0)' }
+			], {
+			duration: 220,
+			iterations: 1
+		})
+		document.querySelector(".carousel-bottom").animate([
+			{ transform: 'translate3D(0, 0, 0)' }, 
+			{ transform: 'translate3D(-1px, 0, 0)' }
+			], {
+			duration: 220,
+			iterations: 1
+		})
+
+		document.querySelector(".gradient").src = data[currentIndex].image;
+		document.querySelector(".top-number").innerHTML = data[currentIndex].number;
+		document.querySelector(".top-number").style.backgroundImage = "url("+ data[currentIndex].image +")";
+		document.querySelector(".top-title").innerHTML = data[currentIndex].title;
+		document.querySelector(".top-description").innerHTML = data[currentIndex].description;
+	}
+
 </script>

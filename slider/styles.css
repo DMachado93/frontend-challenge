@@ -1,9 +1,9 @@
-#corousel-main {
+.carousel-main {
     margin: auto;
     text-align: center;
 }
 
-#carousel-inner {
+.carousel-inner {
     margin: auto;
     width: 35%;
     border-radius: 2%;
@@ -12,20 +12,26 @@
     margin-top: 1%;
 }
 
+
 .arrow {
     cursor: pointer;
 }
 
-#carousel-top {
+.carousel-top {
     height: 50%;
+    text-align: center;
+    animation: fade-in 1s ease-in-out both;
+    overflow-y: hidden;
 }
 
-#carousel-bottom {
+.carousel-bottom {
+    animation: fade-in 1s ease-in-out both;
     height: 50%;
     width: 100%;
+    overflow-y: hidden;
 }
 
-#top-number {
+.top-number {
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -38,8 +44,8 @@
     font-family: 'Roboto', sans-serif;
 }
 
-#top-title {
-    font-size: 3rem;
+.top-title {
+    font-size: 3.5vw;
     color: black;
     font-weight: bold;
     margin: 0 auto 2%;
@@ -47,16 +53,16 @@
 }
 
 
-#top-description {
-    font-size: 1.5rem;
+.top-description {
+    font-size: 2vw;
     color: gray;
     font-weight: lighter;
     margin: auto;
     font-family: 'Roboto', sans-serif;
 }
 
-#gradient {
-    max-width: 100%;
+.gradient {
+    width: 100%;
     height: 100%;
     border-bottom-left-radius: 2%;
     border-bottom-right-radius: 2%;
