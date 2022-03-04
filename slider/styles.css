@@ -1,3 +1,8 @@
+.arrow-container {
+    margin: 1% auto;
+    text-align: center;
+}
+
 .arrow {
     cursor: pointer;
 }
@@ -36,7 +41,7 @@
 
     opacity: 100;
     z-index: 900;
-    transition: all 0.5s ease-in-out;
+    transition: all .5s ease-in-out;
     border-radius: 2%;
 }
 
@@ -52,13 +57,13 @@
 }
 
 .carousel-top {
-    height: 50%;
+    height: 40%;
     text-align: center;
     overflow-y: hidden;
 }
 
 .carousel-bottom {
-    height: 50%;
+    height: 60%;
     width: 100%;
     overflow-y: hidden;
 }
@@ -67,7 +72,7 @@
     width: 35px;
     height: 35px;
     line-height: 35px; 
-    margin: 15% auto 2%;
+    margin: 0% auto 2%;
 
     border-radius: 50%;
     color: white;

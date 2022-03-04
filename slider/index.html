@@ -7,8 +7,10 @@
 		<link rel="stylesheet" href="./styles.css">
 	</head>
 	<body>
-		<a class="arrow" onclick="showPrevious()">&#10094;</a>
-  		<a class="arrow" onclick="showNext()">&#10095;</a>
+		<div class="arrow-container">
+			<a class="arrow" onclick="showPrevious()">&#10094;</a>
+  			<a class="arrow" onclick="showNext()">&#10095;</a>
+		</div>
 		<div class="carousel-main">
 			<div class="carousel-inner active">
 				<div class="carousel-top">
@@ -95,8 +97,14 @@
 				items[currentIndex + 1].classList.add("next");
 			}
 			
-			items[currentIndex - 1].classList.remove("next", "prev", "active");
-			items[currentIndex - 1].classList.add("prev");
+			if(currentIndex === 0) {
+				items[items.length - 1].classList.remove("next", "prev", "active");
+				items[items.length - 1].classList.add("prev");
+			} else {
+				items[currentIndex - 1].classList.remove("next", "prev", "active");
+				items[currentIndex - 1].classList.add("prev");
+			}
+			
 			
 
 		} else { //Go to previous slide
@@ -108,7 +116,7 @@
 			items[currentIndex].classList.remove("next", "prev", "active");
 			items[currentIndex].classList.add("active");
 
-			if(currentIndex === 0) {
+			if(currentIndex === 0) { //First slide
 				items[items.length - 1].classList.remove("next", "prev", "active");
 				items[items.length - 1].classList.add("prev");
 			} else {
@@ -116,9 +124,13 @@
 				items[currentIndex - 1].classList.add("prev");
 			}
 
-			
-			items[currentIndex + 1].classList.remove("next", "prev", "active");
-			items[currentIndex + 1].classList.add("next");
+			if(currentIndex === items.length - 1) {
+				items[0].classList.remove("next", "prev", "active");
+				items[0].classList.add("next");
+			} else {
+				items[currentIndex + 1].classList.remove("next", "prev", "active");
+				items[currentIndex + 1].classList.add("next");
+			}
 		}
 	}
 
