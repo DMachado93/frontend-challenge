@@ -7,26 +7,30 @@ body {
     margin: 0;
     width: 25vw; 
     height: 25vw; 
-    background-color: black;
     padding: 0.5%;
     margin: 5% auto;
     border-radius: 2%;
+
+    background-color: black;
 }
     
 .puzzle {
     margin: 3%;
     padding: 0;
     height: 100%;
+
     list-style: none;
 }
 
 .tile {
-    font-family: 'Roboto', sans-serif;
-    background-color: white;
-    display: inline-block;
     line-height: 200%;
     width: 32%; 
     height: 31%; 
+    margin-bottom: 1%;
+
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+    display: inline-block;
     box-sizing: border-box;
     border-top: 0.5vw solid #ccd1d9;
     border-left: 0.5vw solid #ccd1d9;
@@ -38,11 +42,12 @@ body {
 }
 
 .tile-empty {
+    width: 32%; 
+
     font-family: 'Roboto', sans-serif;
     background-color: transparent;
     display: inline-block;
     box-sizing: border-box;
-    width: 32%; 
 }
 
 figcaption {
@@ -52,12 +57,13 @@ figcaption {
 
 @media only screen and (max-width: 900px) {
     .tile {
-        font-family: 'Roboto', sans-serif;
-        background-color: white;
-        display: inline-block;
         line-height: 200%;
         width: 30.5%; 
         height: 30.5%; 
+
+        font-family: 'Roboto', sans-serif;
+        background-color: white;
+        display: inline-block;
         box-sizing: border-box;
         border: 0.4vw solid #555;
         font-size: 3.5vw;

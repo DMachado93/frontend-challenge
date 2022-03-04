@@ -4,14 +4,15 @@
 
 .carousel-main {
     margin: 1% auto;
+    width: 30%;
+    height: 90vh;
+
     text-align: center;
     overflow: hidden;
     transform-style: preserve-3d;
     position: relative;
-    width: 30%;
     box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.31);
     border-radius: 12px;
-    height: 90vh;
 }
 
 .carousel-main * {
@@ -32,7 +33,7 @@
     margin: 5% auto;
     position: absolute;
     top: 50px;
-    border-radius: 2%;
+
     opacity: 100;
     z-index: 900;
     transition: all 0.5s ease-in-out;
@@ -40,11 +41,12 @@
 }
 
 
-.active.prev {
+.prev {
     z-index: 800;
     transform: translateX(-100%); 
 }
-.active.next {
+
+.next {
     z-index: 800;
     transform: translateX(100%);
 }
@@ -64,30 +66,33 @@
 .top-number {
     width: 35px;
     height: 35px;
+    line-height: 35px; 
+    margin: 15% auto 2%;
+
     border-radius: 50%;
     color: white;
     background-size: cover;
     display: inline-block;
     vertical-align: middle;
-    line-height: 35px; 
-    margin: 15% auto 2%;
     font-family: 'Roboto', sans-serif;
 }
 
 .top-title {
+    margin: 0 auto 2%;
+
     font-size: 3.5vw;
     color: black;
     font-weight: bold;
-    margin: 0 auto 2%;
     font-family: 'Roboto', sans-serif;
 }
 
 
 .top-description {
+    margin: auto;
+    
     font-size: 2vw;
     color: gray;
     font-weight: lighter;
-    margin: auto;
     font-family: 'Roboto', sans-serif;
 }
 

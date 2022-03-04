@@ -77,6 +77,7 @@
 
 	function goToSlide(next) {
 		let items = document.querySelectorAll('.carousel-inner');
+		let inner = document.querySelectorAll('.carousel-top');
 		if(next) { //Go to next slide
 
 		 	items[currentIndex].classList.remove("active");
@@ -86,9 +87,17 @@
 			items[currentIndex].classList.remove("next", "prev", "active");
 			items[currentIndex].classList.add("active");
 
+			if(currentIndex === items.length - 1) { //Last slide
+				items[0].classList.remove("next", "prev", "active");
+				items[0].classList.add("next");
+			} else {
+				items[currentIndex + 1].classList.remove("next", "prev", "active");
+				items[currentIndex + 1].classList.add("next");
+			}
 			
-			items[currentIndex + 1].classList.remove("next", "prev", "active");
-			items[currentIndex + 1].classList.add("next");
+			items[currentIndex - 1].classList.remove("next", "prev", "active");
+			items[currentIndex - 1].classList.add("prev");
+			
 
 		} else { //Go to previous slide
 
@@ -99,14 +108,17 @@
 			items[currentIndex].classList.remove("next", "prev", "active");
 			items[currentIndex].classList.add("active");
 
-			if(currentIndex === items.length - 1) {
-				items[0].classList.remove("next", "prev", "active");
-				items[0].classList.add("next");
+			if(currentIndex === 0) {
+				items[items.length - 1].classList.remove("next", "prev", "active");
+				items[items.length - 1].classList.add("prev");
 			} else {
-				items[currentIndex + 1].classList.remove("next", "prev", "active");
-				items[currentIndex + 1].classList.add("next");
+				items[currentIndex - 1].classList.remove("next", "prev", "active");
+				items[currentIndex - 1].classList.add("prev");
 			}
+
 			
+			items[currentIndex + 1].classList.remove("next", "prev", "active");
+			items[currentIndex + 1].classList.add("next");
 		}
 	}
 
