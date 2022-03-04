@@ -63,8 +63,8 @@
             var temp = tiles[newIndex];
 			let targetLi = document.querySelector('[data-index="'+ newIndex +'"]');
 			let currentLi = document.querySelector('[data-index="'+ index +'"]');
-			targetLi.innerHTML = tiles[index];
-			currentLi.innerHTML = temp;
+			if(tiles[index] !== 0) targetLi.innerHTML = tiles[index];
+			currentLi.innerHTML = "";
 
 			targetLi.classList.remove('tile-empty');
 			targetLi.classList.add('tile');
